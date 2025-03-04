@@ -1,41 +1,29 @@
-# Compiled Lua sources
-luac.out
+-- LocalScript
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+local toolName = "tp"
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+local function giveToolToPlayer()
+    local player = game.Players.LocalPlayer
+    local backpack = player:WaitForChild("Backpack")
 
-# Precompiled Headers
-*.gch
-*.pch
+    -- Check if the tool already exists in the backpack or character
+    if backpack:FindFirstChild(toolName) or player.Character:FindFirstChild(toolName) then
+        print("Tool already exists in the player's inventory.")
+        return
+    end
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
+    -- Create the tool
+    local tool = Instance.new("Tool")
+    tool.Name = toolName
+    tool.RequiresHandle = false
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    -- Optionally, you can add functionality or a handle to the tool here
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    -- Add the tool to the player's backpack
+    tool.Parent = backpack
 
+    print("Tool '" .. toolName .. "' has been added to the player's inventory.")
+end
+
+-- Execute the function to give the tool to the player
+giveToolToPlayer()
